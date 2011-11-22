@@ -94,13 +94,7 @@ __VA_ARGS__ \
 
 @class IASKSpecifier;
 
-@interface IASKSettingsReader : NSObject {
-    NSString        *_path;
-    NSString        *_bundlePath;
-    NSDictionary    *_settingsBundle;
-    NSArray         *_dataSource;
-    NSBundle        *_bundle;
-}
+@interface IASKSettingsReader : NSObject
 
 - (id)initWithFile:(NSString*)file;
 - (NSInteger)numberOfSections;

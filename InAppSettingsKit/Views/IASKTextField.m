@@ -16,14 +16,15 @@
 
 #import "IASKTextField.h"
 
+@interface IASKTextField ()
+{
+    NSString *_key;
+}
+
+@end
 
 @implementation IASKTextField
 
 @synthesize key=_key;
-
-- (void)dealloc {
-    [_key release];
-    [super dealloc];
-}
 
 @end

@@ -18,6 +18,13 @@
 #import "IASKTextField.h"
 #import "IASKSettingsReader.h"
 
+@interface IASKPSTextFieldSpecifierViewCell ()
+{
+    UILabel        *_label;
+    IASKTextField    *_textField;
+}
+@end
+
 @implementation IASKPSTextFieldSpecifierViewCell
 
 @synthesize label=_label,
@@ -35,18 +42,5 @@
 	textFieldFrame.size.width = _textField.superview.frame.size.width - textFieldFrame.origin.x - _label.frame.origin.x;
 	_textField.frame = textFieldFrame;
 }
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
-
-
-- (void)dealloc {
-    [super dealloc];
-}
-
 
 @end

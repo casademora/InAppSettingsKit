@@ -17,30 +17,17 @@
 #import "IASKPSToggleSwitchSpecifierViewCell.h"
 #import "IASKSwitch.h"
 
+@interface IASKPSToggleSwitchSpecifierViewCell ()
+{
+    UILabel    *_label;
+    IASKSwitch   *_toggle;
+}
+
+@end
+
 @implementation IASKPSToggleSwitchSpecifierViewCell
 
 @synthesize label=_label, 
             toggle=_toggle;
-            
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
-        // Initialization code
-    }
-    return self;
-}
-
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
-
-
-- (void)dealloc {
-    [super dealloc];
-}
-
 
 @end

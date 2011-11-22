@@ -21,11 +21,19 @@
 #define kCellValue      @"kCellValue"
 
 @interface IASKSpecifierValuesViewController()
+{
+    UITableView    *_tableView;
+    
+    IASKSpecifier             *_currentSpecifier;
+    NSIndexPath             *_checkedItem;
+	IASKSettingsReader		*_settingsReader;
+}
 - (void)userDefaultsDidChange;
 @end
 
 @implementation IASKSpecifierValuesViewController
 
+@synthesize tableView = _tableView;
 @synthesize currentSpecifier=_currentSpecifier;
 @synthesize checkedItem=_checkedItem;
 @synthesize settingsReader = _settingsReader;
@@ -76,27 +84,6 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait) || (interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
 }
 
-- (void)didReceiveMemoryWarning {
-	// Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-	
-	// Release any cached data, images, etc that aren't in use.
-}
-
-- (void)viewDidUnload {
-	// Release any retained subviews of the main view.
-	// e.g. self.myOutlet = nil;
-}
-
-
-- (void)dealloc {
-    [_currentSpecifier release];
-	[_settingsReader release];
-	_settingsReader = nil;
-	
-    [super dealloc];
-}
-
 
 #pragma mark -
 #pragma mark UITableView delegates
@@ -128,7 +115,7 @@
     NSArray *titles         = [_currentSpecifier multipleTitles];
 	
     if (!cell) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCellValue] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCellValue];
     }
 	
 	if ([indexPath isEqual:[self checkedItem]]) {

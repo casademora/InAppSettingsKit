@@ -19,35 +19,22 @@
 @class IASKSettingsReader;
 @class IASKAppSettingsViewController;
 
-@protocol IASKSettingsDelegate
+@protocol IASKSettingsDelegate <NSObject>
 - (void)settingsViewControllerDidEnd:(IASKAppSettingsViewController*)sender;
 @end
 
 
-@interface IASKAppSettingsViewController : UIViewController <UITextFieldDelegate, UINavigationControllerDelegate> {
-	id<IASKSettingsDelegate>  _delegate;
-    IBOutlet UITableView    *_tableView;
-    
-    NSMutableArray          *_viewList;
-    NSIndexPath             *_currentIndexPath;
-	NSIndexPath				*_topmostRowBeforeKeyboardWasShown;
-	
-	IASKSettingsReader		*_settingsReader;
-	NSString				*_file;
-	
-	id                      _currentFirstResponder;
-    
-    BOOL                    _showCreditsFooter;
-    BOOL                    _showDoneButton;
-}
+@interface IASKAppSettingsViewController : UIViewController <UITextFieldDelegate, UINavigationControllerDelegate> 
 
-@property (nonatomic, assign) id delegate;
+@property (nonatomic, assign) id<IASKSettingsDelegate> delegate;
 @property (nonatomic, retain) NSIndexPath   *currentIndexPath;
 @property (nonatomic, retain) IASKSettingsReader *settingsReader;
 @property (nonatomic, copy) NSString *file;
 @property (nonatomic, retain) id currentFirstResponder;
 @property (nonatomic, assign) BOOL showCreditsFooter;
 @property (nonatomic, assign) BOOL showDoneButton;
+
+@property (nonatomic, retain) IBOutlet UITableView *tableView;
 
 - (IBAction)dismiss:(id)sender;
 

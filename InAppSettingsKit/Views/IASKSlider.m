@@ -16,14 +16,15 @@
 
 #import "IASKSlider.h"
 
+@interface IASKSlider ()
+{
+    NSString *_key;
+}
+
+@end
 
 @implementation IASKSlider
 
 @synthesize key=_key;
-
-- (void)dealloc {
-    [_key release];
-    [super dealloc];
-}
 
 @end

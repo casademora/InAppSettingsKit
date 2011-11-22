@@ -18,6 +18,15 @@
 #import "IASKSlider.h"
 #import "IASKSettingsReader.h"
 
+@interface IASKPSSliderSpecifierViewCell ()
+{
+    IASKSlider       *_slider;
+    UIImageView    *_minImage;
+    UIImageView    *_maxImage;
+}
+
+@end
+
 @implementation IASKPSSliderSpecifierViewCell
 
 @synthesize slider=_slider, 
@@ -57,10 +66,6 @@
 	
 	_slider.bounds = sliderBounds;
     _slider.center = sliderCenter;
-}	
-
-- (void)dealloc {
-    [super dealloc];
 }
 
 - (void)prepareForReuse {

@@ -17,7 +17,15 @@
 #import "IASKSettingsReader.h"
 #import "IASKSpecifier.h"
 
-@interface IASKSettingsReader (private)
+@interface IASKSettingsReader ()
+{
+    NSString        *_path;
+    NSString        *_bundlePath;
+    NSDictionary    *_settingsBundle;
+    NSArray         *_dataSource;
+    NSBundle        *_bundle;
+}
+
 - (void)_reinterpretBundle:(NSDictionary*)settingsBundle;
 - (BOOL)_sectionHasHeading:(NSInteger)section;
 
@@ -43,7 +51,7 @@ dataSource=_dataSource;
         self.path = [self locateSettingsFile: file];
         [self setSettingsBundle:[NSDictionary dictionaryWithContentsOfFile:self.path]];
         self.bundlePath = [self.path stringByDeletingLastPathComponent];
-        _bundle = [[NSBundle bundleWithPath:[self bundlePath]] retain];
+        _bundle = [NSBundle bundleWithPath:[self bundlePath]];
         
         if (_settingsBundle) {
             [self _reinterpretBundle:_settingsBundle];
@@ -52,19 +60,11 @@ dataSource=_dataSource;
     return self;
 }
 
-- (void)dealloc {
-    [_path release];
-	[_bundlePath release];
-    [_settingsBundle release];
-    [_dataSource release];
-    [_bundle release];
-    [super dealloc];
-}
 
 - (void)_reinterpretBundle:(NSDictionary*)settingsBundle {
     NSArray *preferenceSpecifiers   = [settingsBundle objectForKey:kIASKPreferenceSpecifiers];
     NSInteger sectionCount          = -1;
-    NSMutableArray *dataSource      = [[[NSMutableArray alloc] init] autorelease];
+    NSMutableArray *dataSource      = [NSMutableArray array];
     
     for (NSDictionary *specifier in preferenceSpecifiers) {
         if ([(NSString*)[specifier objectForKey:kIASKType] isEqualToString:kIASKPSGroupSpecifier]) {
@@ -72,20 +72,17 @@ dataSource=_dataSource;
             
             [newArray addObject:specifier];
             [dataSource addObject:newArray];
-            [newArray release];
             sectionCount++;
         }
         else {
             if (sectionCount == -1) {
                 NSMutableArray *newArray = [[NSMutableArray alloc] init];
 				[dataSource addObject:newArray];
-				[newArray release];
 				sectionCount++;
 			}
 
             IASKSpecifier *newSpecifier = [[IASKSpecifier alloc] initWithSpecifier:specifier];
             [(NSMutableArray*)[dataSource objectAtIndex:sectionCount] addObject:newSpecifier];
-            [newSpecifier release];
         }
     }
     [self setDataSource:dataSource];

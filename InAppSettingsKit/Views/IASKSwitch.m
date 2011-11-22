@@ -16,15 +16,15 @@
 
 #import "IASKSwitch.h"
 
+@interface IASKSwitch ()
+{
+    NSString *_key;
+}
+
+@end
 
 @implementation IASKSwitch
 
 @synthesize key=_key;
-
-- (void)dealloc {
-    [_key release];
-    [super dealloc];
-}
-
 
 @end

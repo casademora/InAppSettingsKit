@@ -19,11 +19,8 @@
 
 @class IASKSettingsReader;
 
-@interface IASKSpecifier : NSObject {
-    NSDictionary    *_specifierDict;
-    NSDictionary    *_multipleValuesDict;
-	IASKSettingsReader *_settingsReader;
-}
+@interface IASKSpecifier : NSObject 
+
 @property (nonatomic, retain) NSDictionary  *specifierDict;
 @property (nonatomic, assign) IASKSettingsReader *settingsReader;
 
